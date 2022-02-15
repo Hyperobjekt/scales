@@ -60,7 +60,7 @@ const Scale = ({
   nice,
   thresholds,
   chunks,
-  width,
+  width = 280,
   type,
   margin = DEFAULT_MARGIN,
   min,
@@ -92,7 +92,11 @@ const Scale = ({
   }, [width, colors, thresholds, type, margin, chunks, data, options]);
   return (
     <ScaleContext.Provider value={value}>
-      <div className={clsx("HypScale-root", className)} {...props}>
+      <div
+        className={clsx("HypScale-root", className)}
+        style={{ width }}
+        {...props}
+      >
         {children}
       </div>
     </ScaleContext.Provider>
