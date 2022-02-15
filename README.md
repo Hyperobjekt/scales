@@ -1,4 +1,4 @@
-# @hyperobjekt/legend
+# @hyperobjekt/scales
 
 This package consists of react components for creating data scales that can be used for data readouts or legends.
 
@@ -17,7 +17,8 @@ Each scale consists of a wrapper component with one or more child components.
 - `<Scale.Colors />`: renders the scale's colors
 - `<Scale.Ticks />`: renders an axis to label the scale
 - `<Scale.Marker />` renders a marker on the scale at a given value
-- `<Scale.Bubbles />` renders a marker on the scale at a given value
+- `<Scale.Bubbles />` renders bubbles for the scale config
+- `<Scale.Chunks />`: renders a vertical list of ranges in the scale
 
 ## Demo
 
