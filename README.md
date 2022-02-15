@@ -85,10 +85,6 @@ Renders a color scale for the given data and scale type.
 
 - `height`: height of the color scale
 
-#### Usage
-
-See the [storybook](https://hyperobjekt.github.io/core/) for usage
-
 ### `<Scale.Ticks />`
 
 Renders tick labels for the given data and scale type.
@@ -103,10 +99,6 @@ Renders tick labels for the given data and scale type.
 - `tickSizeOuter`: size of the outer ticks on the scale
 - `tickPadding`: padding space between ticks
 - `endTicks`: forces the min and max ticks to show on the scale (overrides `ticks` props)
-
-#### Usage
-
-See the [storybook](https://hyperobjekt.github.io/core/) for usage
 
 ### `<Scale.Marker />`
 
@@ -144,6 +136,20 @@ Renders a vertical list of scale chunks with colors and value ranges.
 
 - `formatLabel`: function that takes the chunk value, index, and total chunks and returns a string.
 
+## Context
+
+### `useScaleContext()`
+
+You can use the `useScaleContext()` hook provided by this package to create your own child components. The scale context provides the following:
+
+- `width`: width of the scale
+- `margin`: margins for the scale
+- `data`: data for the scale
+- `position`: a scale for mapping values to position on the scale
+- `color`: a scale for mapping values to colors
+- `chunks`: objects containing data for "chunks" on discrete scales (not available on continuous scales)
+- `extent`: an array with the [min, max] of the position / color scale
+
 ## Utility Functions
 
 The following utility functions are provided by this package:
@@ -179,14 +185,4 @@ Returns a scale that maps a data domain to a pixel value range.
 - `options`: options for the scale
   - `nice`: when true, the domain is adjusted to have [nice values](https://github.com/d3/d3-scale#continuous_nice)
 
-## `useScaleContext()`
 
-You can use the `useScaleContext()` hook provided by this package to create your own child components. The scale context provides the following:
-
-- `width`: width of the scale
-- `margin`: margins for the scale
-- `data`: data for the scale
-- `position`: a scale for mapping values to position on the scale
-- `color`: a scale for mapping values to colors
-- `chunks`: objects containing data for "chunks" on discrete scales (not available on continuous scales)
-- `extent`: an array with the [min, max] of the position / color scale
