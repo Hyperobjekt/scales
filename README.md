@@ -1,5 +1,7 @@
 # @hyperobjekt/scales
 
+![2022-02-15 15 18 51](https://user-images.githubusercontent.com/21034/154166265-3b2e4137-268f-4a6e-8a90-31aa971ed489.gif)
+
 This package consists of react components for creating data scales that can be used for data readouts or legends.
 
 It allows for several different types of scales, including:
