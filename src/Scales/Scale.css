@@ -1,0 +1,54 @@
+.HypScale-root {
+  position: relative;
+}
+
+.HypScale-colors {
+  display: block;
+  box-sizing: border-box;
+}
+
+.HypScale-markerWrapper {
+  position: absolute;
+  top: 0;
+  width: 0;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HypScale-pointerWrapper {
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.HypScale-pointerWrapper > * {
+  flex-shrink: 0;
+}
+
+.HypScale-chunkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.HypScale-chunkListItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5em;
+}
+
+.HypScale-chunkMarker {
+  width: 12px;
+  height: 12px;
+}
+
+.HypScale-chunkLabel {
+  font-size: 0.8125rem;
+}
