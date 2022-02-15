@@ -22,7 +22,7 @@ Each scale consists of a wrapper component with one or more child components.
 
 ## Demo
 
--
+- [codesandbox](https://codesandbox.io/s/hyperobjekt-scales-3wzh8e)
 
 ## Usage
 
