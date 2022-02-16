@@ -12,6 +12,9 @@
   "exports": {
     ".": {
       "import": "./dist/HypScales.es.js"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css"
     }
   },
   "scripts": {

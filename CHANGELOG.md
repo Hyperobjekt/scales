@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.0.3] - 2022-02-16
+
+- fix: update package.json to include css export
+
 ## [2.0.2] - 2022-02-15
 
 - doc update to add demo to README
