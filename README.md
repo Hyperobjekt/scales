@@ -44,7 +44,7 @@ Import the required components and the base CSS styles:
 
 ```jsx
 import Scale from "@hyperobjekt/scales";
-import "@hyperobjekt/scales/dist/Scale.css";
+import "@hyperobjekt/scales/dist/style.css";
 ```
 
 Assemble the scale parts as desired:
