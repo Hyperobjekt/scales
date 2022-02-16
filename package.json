@@ -1,6 +1,6 @@
 {
   "name": "@hyperobjekt/scales",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hyperobjekt/scales"
@@ -43,14 +43,14 @@
     "vite": "^2.8.0"
   },
   "peerDependencies": {
-    "react": "^16.13.1 || ^17.0.0",
-    "react-dom": "^16.13.1 || ^17.0.0",
     "d3-array": "^2.12.1",
     "d3-axis": "^2.1.0",
     "d3-color": "^2.0.0",
     "d3-interpolate": "^2.0.1",
     "d3-scale": "^3.3.0",
     "d3-scale-chromatic": "^2.0.0",
-    "d3-selection": "^2.0.0"
+    "d3-selection": "^2.0.0",
+    "react": "^16.13.1 || ^17.0.0",
+    "react-dom": "^16.13.1 || ^17.0.0"
   }
 }
