@@ -25,11 +25,16 @@ export const ScaleTicks = ({
   endTicks,
   margin = { left: 0, right: 0 },
   className,
+  reverse,
   ...props
 }) => {
   // adjust the scale for the inner width
   const innerWidth = width - (margin.left + margin.right);
-  const scaleRange = [1, innerWidth - 1];
+  // const scaleRange = [1, innerWidth - 1];
+    // REVERSEXXX3 tick scale range
+  const scaleRange = !!reverse ? 
+    [innerWidth - 1, 1] :
+    [1, innerWidth - 1]
   const innerScale = scale.copy().range(scaleRange); // copy to avoid mutating the original scale
 
   // supports top or bottom aligned ticks
@@ -89,6 +94,7 @@ ScaleTicks.propTypes = {
   tickPadding: PropTypes.number,
   margin: PropTypes.object,
   className: PropTypes.string,
+  reverse: PropTypes.bool,
 };
 
 /** Tick component connected to the scale context */
@@ -100,18 +106,21 @@ export default function Ticks(props) {
     type,
     chunks,
     thresholds,
+    reverse,
   } = useScaleContext();
   let tickValues;
 
   // quantile and quantize have fixes tick values
   if (type === "quantile" || type === "quantize")
-    tickValues = [...chunks.map((c) => scale.invert(c.x)), scale.domain()[1]];
+    tickValues = [...chunks.map((c) => scale.invert(c.x)), scale.domain()[
+      !!reverse ? 0 : 1
+    ]];
 
   // threshold has fixed tick values at provided thresholds
   if (type === "threshold")
     tickValues = [scale.domain()[0], ...thresholds, scale.domain()[1]];
 
-  return <ScaleTicks {...{ width, scale, margin, tickValues }} {...props} />;
+  return <ScaleTicks {...{ width, scale, margin, tickValues, reverse }} {...props} />;
 }
 
 Ticks.propTypes = ScaleTicks.propTypes;

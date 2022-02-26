@@ -8,6 +8,7 @@ const ContinuousColorScale = ({
   width = 200,
   height = 12,
   margin = { left: 0, right: 0, top: 0, bottom: 0 },
+  reverse = false,
   className,
   ...props
 }) => {
@@ -23,10 +24,12 @@ const ContinuousColorScale = ({
     canvas.style.display = "block";
     const context = canvas.getContext("2d");
     for (let i = 0; i < points; ++i) {
-      context.fillStyle = colors[i];
+      // for reversed scales, add colors in opposite direction
+      const j = !!reverse ? (points - i - 1) : i
+      context.fillStyle = colors[j];
       context.fillRect(i, 0, 1, 1);
     }
-  }, [width, height, points, colors]);
+  }, [width, height, points, colors, reverse]);
 
   return (
     <div

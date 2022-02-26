@@ -8,6 +8,7 @@ const DiscreteColorScale = ({
   height = 12,
   margin = { left: 0, right: 0, top: 0, bottom: 0 },
   rectProps = {},
+  reverse = false,
   className,
 }) => {
   const innerWidth = width - (margin.left + margin.right);

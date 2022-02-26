@@ -76,6 +76,7 @@ The parent component that contains the scale configuration.
 - `chunks`: Determines how many groups to split data into for `quantize` and `quantile` scales.
 - `min`: Minimum value for the scale
 - `max`: Maximum value for the scale
+- `reverse`: whether or not the scale orientation is reversed (max on the left)
 
 ### `<Scale.Colors />`
 
@@ -149,6 +150,7 @@ You can use the `useScaleContext()` hook provided by this package to create your
 - `color`: a scale for mapping values to colors
 - `chunks`: objects containing data for "chunks" on discrete scales (not available on continuous scales)
 - `extent`: an array with the [min, max] of the position / color scale
+- `reverse`: whether or not the scale orientation is reversed (max on the left)
 
 ## Utility Functions
 

@@ -68,11 +68,12 @@ const Scale = ({
   categories,
   children,
   className,
+  reverse = false,
   ...props
 }) => {
   const options = useMemo(
-    () => ({ accessor, thresholds, chunks, nice, min, max, categories }),
-    [accessor, thresholds, chunks, nice, min, max, categories]
+    () => ({ accessor, thresholds, chunks, nice, min, max, categories, reverse }),
+    [accessor, thresholds, chunks, nice, min, max, categories, reverse]
   );
   /** Value provided by ScaleContext */
   const value = useMemo(() => {
@@ -87,6 +88,7 @@ const Scale = ({
       thresholds,
       extent,
       chunks,
+      reverse,
       ...scales,
     };
   }, [width, colors, thresholds, type, margin, chunks, data, options]);
