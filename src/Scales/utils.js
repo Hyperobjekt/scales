@@ -247,7 +247,6 @@ export const getContinuousScale = ({
  * @param {number} QuantileScaleConfig.chunks - (optional) number of quantile "chunks" to use in the scale (default: 5)
  * @param {boolean} QuantileScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
  * @param {boolean} QuantileScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
- *
  * @returns {Object} { position, color, chunks }
  */
 export const getQuantileScale = ({
@@ -288,8 +287,7 @@ export const getQuantileScale = ({
  * @param {number} ThresholdScaleConfig.min - (optional) minimum value for the scale
  * @param {number} ThresholdScaleConfig.max - (optional) maximum value for the scale
  * @param {boolean} ThresholdScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
-* @param {boolean} ThresholdScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
-
+ * @param {boolean} ThresholdScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
  * @returns {Object} { threshold, position, color, chunks }
  */
 export const getThresholdScale = ({
@@ -334,7 +332,6 @@ export const getThresholdScale = ({
  * @param {number} QuantizeScaleConfig.max - (optional) maximum value for the scale
  * @param {boolean} QuantizeScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
  * @param {boolean} QuantizeScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
-
  * @returns {Object} { quantize, position, color, chunks }
  */
 export const getQuantizeScale = ({

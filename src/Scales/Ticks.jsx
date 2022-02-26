@@ -30,8 +30,6 @@ export const ScaleTicks = ({
 }) => {
   // adjust the scale for the inner width
   const innerWidth = width - (margin.left + margin.right);
-  // const scaleRange = [1, innerWidth - 1];
-    // REVERSEXXX3 tick scale range
   const scaleRange = !!reverse ? 
     [innerWidth - 1, 1] :
     [1, innerWidth - 1]
