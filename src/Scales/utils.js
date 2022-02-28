@@ -118,7 +118,7 @@ export const getCategoryChunks = ({ positionScale, colorScale }) => {
  * that correspond to rectangles for creating discrete color scales
  * @returns {Array<object>} [{value, x, width, color}]
  */
-export const getChunks = ({ positionScale, colorScale }) => {
+export const getChunks = ({ positionScale, colorScale, reverse }) => {
   const scaleCuts = colorScale.thresholds
     ? colorScale.thresholds()
     : colorScale.quantiles
@@ -132,10 +132,11 @@ export const getChunks = ({ positionScale, colorScale }) => {
   const boxLimits = limits
     .slice(0, limits.length - 1)
     .map((d, j) => [limits[j], limits[j + 1]]);
+
   return boxLimits.map((l, k) => ({
     value: [l[0], l[1]],
-    x: positionScale(l[0]),
-    width: positionScale(l[1]) - positionScale(l[0]),
+    x: positionScale(l[!!reverse ? 1 : 0]),
+    width: Math.abs(positionScale(l[1]) - positionScale(l[0])),
     color: colorScale.range()[k],
   }));
 };
@@ -213,6 +214,7 @@ export const getCategoryScale = ({
  * @param {number} ContinuousScaleConfig.min - (optional) minimum value for the scale
  * @param {number} ContinuousScaleConfig.max - (optional) maximum value for the scale
  * @param {boolean} ContinuousScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
+ * @param {boolean} ContinuousScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
  * @returns {Object} { position, color }
  */
 export const getContinuousScale = ({
@@ -222,9 +224,11 @@ export const getContinuousScale = ({
   accessor,
   min,
   max,
+  reverse = false,
 }) => {
-  const domain = getDomain({ data, accessor, min, max });
-  const positionScale = getPositionScale("linear", domain, [0, 1], {
+  const domain = getDomain({ data, accessor, min, max, reverse });
+  const range = !!reverse ? [1, 0] : [0, 1];
+  const positionScale = getPositionScale("linear", domain, range, {
     nice,
   });
   const colorScale = getColorScale("sequential", domain, colors);
@@ -242,6 +246,7 @@ export const getContinuousScale = ({
  * @param {string|Array<string>} QuantileScaleConfig.colors - (optional) an array of colors or a d3-scale-chromatic color scale string
  * @param {number} QuantileScaleConfig.chunks - (optional) number of quantile "chunks" to use in the scale (default: 5)
  * @param {boolean} QuantileScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
+ * @param {boolean} QuantileScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
  * @returns {Object} { position, color, chunks }
  */
 export const getQuantileScale = ({
@@ -250,12 +255,14 @@ export const getQuantileScale = ({
   chunks = 5,
   nice,
   accessor,
+  reverse = false,
 }) => {
   if (!data || !data.length)
     throw new Error("no data provided for quantile scale");
   const values = accessor ? data.map(accessor) : data;
   const scaleColors = getColors(colors, chunks);
-  const positionScale = getPositionScale("quantile", values, [0, 1], {
+  const range = !!reverse ? [1, 0] : [0, 1];
+  const positionScale = getPositionScale("quantile", values, range, {
     nice,
   });
   const colorScale = getColorScale("quantile", values, scaleColors);
@@ -266,7 +273,7 @@ export const getQuantileScale = ({
     quantile: quantileScale,
     position: positionScale,
     color: colorScale,
-    chunks: getChunks({ positionScale, colorScale }),
+    chunks: getChunks({ positionScale, colorScale, reverse }),
   };
 };
 
@@ -280,6 +287,7 @@ export const getQuantileScale = ({
  * @param {number} ThresholdScaleConfig.min - (optional) minimum value for the scale
  * @param {number} ThresholdScaleConfig.max - (optional) maximum value for the scale
  * @param {boolean} ThresholdScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
+ * @param {boolean} ThresholdScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
  * @returns {Object} { threshold, position, color, chunks }
  */
 export const getThresholdScale = ({
@@ -290,6 +298,7 @@ export const getThresholdScale = ({
   nice,
   min,
   max,
+  reverse = false,
 }) => {
   if (!thresholds || !thresholds.length)
     throw new Error("must provide thresholds config array for threshold scale");
@@ -297,8 +306,9 @@ export const getThresholdScale = ({
   const scaleColors = getColors(colors, thresholds.length + 1);
   // maps data values to threshold colors
   const colorScale = getColorScale("threshold", thresholds, scaleColors);
+  const range = !!reverse ? [1, 0] : [0, 1];
   // maps data values to a position from 0 to 1
-  const positionScale = getPositionScale("threshold", domain, [0, 1], { nice });
+  const positionScale = getPositionScale("threshold", domain, range, { nice });
   // maps data values to threshold chunk index
   const thresholdScale = scaleThreshold()
     .domain(thresholds)
@@ -307,7 +317,7 @@ export const getThresholdScale = ({
     threshold: thresholdScale,
     position: positionScale,
     color: colorScale,
-    chunks: getChunks({ positionScale, colorScale }),
+    chunks: getChunks({ positionScale, colorScale, reverse }),
   };
 };
 
@@ -321,6 +331,7 @@ export const getThresholdScale = ({
  * @param {number} QuantizeScaleConfig.min - (optional) minimum value for the scale
  * @param {number} QuantizeScaleConfig.max - (optional) maximum value for the scale
  * @param {boolean} QuantizeScaleConfig.nice - (optional) use nice rounded numbers in the scale (default: true)
+ * @param {boolean} QuantizeScaleConfig.reverse - (optional) reverse the orientation of the scale (ie max on the left)
  * @returns {Object} { quantize, position, color, chunks }
  */
 export const getQuantizeScale = ({
@@ -331,10 +342,12 @@ export const getQuantizeScale = ({
   accessor,
   min,
   max,
+  reverse = false,
 }) => {
   const domain = getDomain({ data, accessor, min, max });
   const scaleColors = getColors(colors, chunks);
-  const positionScale = getPositionScale("quantize", domain, [0, 1], {
+  const range = !!reverse ? [1, 0] : [0, 1];
+  const positionScale = getPositionScale("quantize", domain, range, {
     nice,
   });
   const colorScale = getColorScale(
@@ -349,7 +362,7 @@ export const getQuantizeScale = ({
     quantize: quantizeScale,
     position: positionScale,
     color: colorScale,
-    chunks: getChunks({ positionScale, colorScale }),
+    chunks: getChunks({ positionScale, colorScale, reverse }),
   };
 };
 

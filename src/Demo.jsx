@@ -32,6 +32,7 @@ const Heading = (props) => {
 const QUANTILE_DATA = Array.from({ length: 250 }, () => Math.random() * 1);
 
 function Demo() {
+  const [reverse, setReverse] = useState(false);
   const [markValue, setMarkValue] = useState(null);
   const [count, setCount] = useState(0);
   // map mark value from 1 - 5
@@ -46,18 +47,31 @@ function Demo() {
       clearTimeout(timeout);
     };
   }, [count]);
+
+  const reverseText = reverse ? 'Reversed ' : ''
+  const notReversibleText = reverse ? ' (not reversible)' : ''
   return (
     <div className="App">
       <div>
-        <Heading>Ticks</Heading>
-        <Scale type="continuous" min={-67} max={24} nice>
+        <label>
+        <input
+          type="checkbox"
+          checked={reverse}
+          onChange={() => setReverse(!reverse)}
+        />
+          Reverse scales
+        </label>
+      </div>
+      <div>
+        <Heading>{reverseText}Ticks</Heading>
+        <Scale type="continuous" min={-67} max={24} nice reverse={reverse}>
           <Scale.Ticks position="top" endTicks tickValues={[0, -25]} />
           <Scale.Ticks ticks={5} />
         </Scale>
       </div>
       <div>
-        <Heading>Continuous Scale</Heading>
-        <Scale type="continuous" min={0} max={1} colors="Magma">
+        <Heading>{reverseText}Continuous Scale</Heading>
+        <Scale type="continuous" min={0} max={1} colors="Magma" reverse={reverse}>
           <Scale.Marker value={markValue} pointer>
             <Label>{formatter(markValue)}</Label>
           </Scale.Marker>
@@ -67,7 +81,7 @@ function Demo() {
       </div>
 
       <div>
-        <Heading>Category Scale</Heading>
+        <Heading>Category Scale{notReversibleText}</Heading>
         <Scale type="category" categories={categories} colors="Cool">
           <Scale.Marker value={markValue && categories[categoryIndex]} pointer>
             <Label>{markValue && categories[categoryIndex]}</Label>
@@ -77,8 +91,8 @@ function Demo() {
         </Scale>
       </div>
       <div>
-        <Heading>Quantize Scale</Heading>
-        <Scale type="quantize" chunks={5} min={0} max={1} colors="Spectral">
+        <Heading>{reverseText}Quantize Scale</Heading>
+        <Scale type="quantize" chunks={5} min={0} max={1} colors="Spectral" reverse={reverse}>
           <Scale.Marker value={markValue} pointer>
             <Label>{formatter(markValue)}</Label>
           </Scale.Marker>
@@ -87,7 +101,7 @@ function Demo() {
         </Scale>
       </div>
       <div>
-        <Heading>Quantile Scale</Heading>
+        <Heading>{reverseText}Quantile Scale</Heading>
         <Scale
           type="quantile"
           data={QUANTILE_DATA}
@@ -95,6 +109,7 @@ function Demo() {
           min={0}
           max={1}
           colors="OrRd"
+          reverse={reverse}
         >
           <Scale.Marker value={markValue} pointer>
             <Label>{formatter(markValue)}</Label>
@@ -105,12 +120,13 @@ function Demo() {
       </div>
 
       <div>
-        <Heading>Threshold Scale</Heading>
+        <Heading>{reverseText}Threshold Scale</Heading>
         <Scale
           type="threshold"
           thresholds={[0.1, 0.3, 0.6]}
           min={0}
           max={1}
+          reverse={reverse}
           colors={["#6baed6", "#9ecae1", "#c6dbef", "#deebf7", "#f7fbff"]}
         >
           <Scale.Marker value={markValue} pointer>
@@ -121,7 +137,7 @@ function Demo() {
         </Scale>
       </div>
       <div>
-        <Heading>Bubble Scale</Heading>
+        <Heading>Bubble Scale{notReversibleText}</Heading>
         <Scale type="bubble" chunks={3} min={0} max={1} colors="YlGnBu">
           <Scale.Bubbles
             minSize={16}
@@ -133,7 +149,7 @@ function Demo() {
         </Scale>
       </div>
       <div>
-        <Heading>Chunks Scale</Heading>
+        <Heading>Chunks Scale{notReversibleText}</Heading>
         <Scale type="quantize" chunks={5} min={0} max={1} colors="Spectral">
           <Scale.Chunks />
         </Scale>
