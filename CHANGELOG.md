@@ -1,5 +1,9 @@
 # Changelog
 
+## [2.1.2] - 2022-03-04
+
+- chore: update dependencies and add license
+
 ## [2.1.1] - 2022-03-04
 
 - chore: switch from `react-spring` to `@react-spring/web` to supress peer dependency warnings.
