@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { useScaleContext } from "./Scale";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 
 const defaultRenderPointer = ({ color, position, value }) => {
   return (

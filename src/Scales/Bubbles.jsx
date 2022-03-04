@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import deepmerge from "deepmerge";
 import clsx from "clsx";
 import { useScaleContext } from ".";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring } from "@react-spring/web";
 
 const defaultTheme = {
   bubble: {
