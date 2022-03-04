@@ -1,6 +1,7 @@
 {
   "name": "@hyperobjekt/scales",
-  "version": "2.1.1",
+  "version": "2.1.2",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Hyperobjekt/scales"
@@ -34,23 +35,16 @@
     "d3-scale-chromatic": "^2.0.0",
     "d3-selection": "^2.0.0",
     "deepmerge": "^4.2.2",
-    "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "vite": "^2.8.0"
   },
   "peerDependencies": {
-    "d3-array": "^2.12.1",
-    "d3-axis": "^2.1.0",
-    "d3-color": "^2.0.0",
-    "d3-interpolate": "^2.0.1",
-    "d3-scale": "^3.3.0",
-    "d3-scale-chromatic": "^2.0.0",
-    "d3-selection": "^2.0.0",
-    "react": "^16.13.1 || ^17.0.0",
-    "react-dom": "^16.13.1 || ^17.0.0"
+    "react": "^16.8.0  || ^17.0.0",
+    "react-dom": "^16.8.0  || ^17.0.0"
   }
 }
